@@ -1,0 +1,7 @@
+Origin: Hyprland Parrot
+Label: Hyprland for Parrot OS
+Suite: echo-security
+Codename: echo
+Components: main
+Architectures: amd64
+SignWith: no

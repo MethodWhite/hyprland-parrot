@@ -1,0 +1,54 @@
+# Build directories
+**/build/
+**/hyprland-build/
+
+# Compiled binaries
+*.so
+*.a
+
+# Object files
+*.o
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+*~
+
+# Editor directories
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+logs/
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Archivos de configuración personal (no incluir datos sensibles)
+# config/hypr/hyprland.conf  # Descomentar si quieres incluir tu config personal
+
+# Wallpapers personales (muy grandes)
+assets/wallpapers/*.jpg
+assets/wallpapers/*.png
+
+# Fuentes descargadas
+assets/fonts/
+
+# Scripts con credenciales
+scripts/*secret*
+scripts/*.env
+
+# Archivos generados
+docs/generated/
+*.gen.*

@@ -1,0 +1,22 @@
+Source: hyprutils
+Section: libs
+Priority: optional
+Maintainer: S4vitar Style <hyprland@parrot.local>
+Build-Depends: debhelper-compat (= 13), cmake, ninja-build, pkg-config,
+ libwayland-dev, libxkbcommon-dev
+
+Rules-Requires-Root: no
+
+Package: libhyprutils0
+Architecture: any
+Multi-Arch: same
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Hyprland utilities library
+ Hyprland utilities library used by various Hyprland components.
+
+Package: libhyprutils-dev
+Architecture: any
+Multi-Arch: same
+Depends: libhyprutils0 (= ${binary:Version}), ${misc:Depends}
+Description: Hyprland utilities library - development files
+ Development files for the Hyprland utilities library.

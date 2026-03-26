@@ -1,0 +1,85 @@
+/* ==========================================================================
+   Wofi Style - S4vitar Theme
+   Launcher para Hyprland
+   ========================================================================== */
+
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 14px;
+}
+
+window {
+    background: rgba(13, 13, 22, 0.98);
+    border: 2px solid rgba(0, 255, 159, 0.4);
+    border-radius: 8px;
+    margin: 0;
+    padding: 0;
+}
+
+#inner-box {
+    margin: 10px;
+    padding: 0;
+    background: transparent;
+}
+
+#outer-box {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+}
+
+#input {
+    background: rgba(30, 30, 46, 0.8);
+    border: 1px solid rgba(0, 255, 159, 0.3);
+    border-radius: 6px;
+    margin: 10px 10px 5px 10px;
+    padding: 10px 15px;
+    color: #c0caf5;
+    font-weight: 600;
+}
+
+#input:focus {
+    border: 1px solid rgba(0, 255, 159, 0.6);
+    box-shadow: 0 0 8px rgba(0, 255, 159, 0.2);
+}
+
+#scroll {
+    margin: 5px 10px 10px 10px;
+    padding: 0;
+}
+
+#text {
+    color: #c0caf5;
+    margin: 5px;
+    padding: 8px 12px;
+}
+
+#entry {
+    margin: 3px 0;
+    padding: 0;
+    border-radius: 4px;
+    background: transparent;
+}
+
+#entry:selected {
+    background: linear-gradient(90deg, rgba(0, 255, 159, 0.3), rgba(0, 212, 255, 0.2));
+    border: 1px solid rgba(0, 255, 159, 0.4);
+}
+
+#entry:selected #text {
+    color: #00ff9f;
+    font-weight: 700;
+}
+
+#unselected {
+    color: #6b7a8f;
+}
+
+#selected {
+    color: #00ff9f;
+}
+
+#entry:drop(active) {
+    background: rgba(187, 154, 247, 0.2);
+    border: 1px solid rgba(187, 154, 247, 0.3);
+}

@@ -1,0 +1,241 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 36,
+    "exclusive": true,
+    "passthrough": false,
+    "margin-top": 0,
+    "margin-bottom": 0,
+    "margin-left": 0,
+    "margin-right": 0,
+    
+    "modules-left": [
+        "hyprland/workspaces",
+        "hyprland/submap",
+        "custom/window_snap"
+    ],
+    "modules-center": [
+        "hyprland/window"
+    ],
+    "modules-right": [
+        "custom/window_info",
+        "tray",
+        "pulseaudio",
+        "network",
+        "memory",
+        "cpu",
+        "battery",
+        "clock"
+    ],
+
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "on-click": "activate",
+        "active-only": false,
+        "all-outputs": true,
+        "show-special": false,
+        "icons": {
+            "1": "",
+            "2": "",
+            "3": "",
+            "4": "",
+            "5": "",
+            "6": "",
+            "7": "",
+            "8": "",
+            "9": "",
+            "10": "",
+            "active": "",
+            "default": "",
+            "urgent": ""
+        },
+        "persistent-workspaces": {
+            "*": 5
+        }
+    },
+
+    "hyprland/submap": {
+        "format": " {}",
+        "tooltip": false
+    },
+
+    "hyprland/window": {
+        "format": "{}",
+        "max-length": 60,
+        "icon": false,
+        "separate-outputs": false,
+        "rewrite": {
+            "kitty": "📟 Terminal",
+            "Kitty": "📟 Terminal",
+            "dolphin": "📁 Dolphin",
+            "Dolphin": "📁 Dolphin",
+            "firefox": "🌐 Firefox",
+            "Firefox": "🌐 Firefox",
+            "code": "💻 VS Code",
+            "Code": "💻 VS Code",
+            "Code - OSS": "💻 VS Code",
+            "thunderbird": "📧 Thunderbird",
+            "Thunderbird": "📧 Thunderbird",
+            "spotify": "🎵 Spotify",
+            "Spotify": "🎵 Spotify",
+            "discord": "💬 Discord",
+            "Discord": "💬 Discord",
+            "telegram": "✈ Telegram",
+            "Telegram": "✈ Telegram",
+            "obs": "🎥 OBS",
+            "OBS": "🎥 OBS",
+            "vlc": "🎬 VLC",
+            "Vlc": "🎬 VLC"
+        }
+    },
+
+    "tray": {
+        "icon-size": 18,
+        "spacing": 10,
+        "show-passive-items": true,
+        "tooltip": true
+    },
+
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-bluetooth": "{icon} {volume}%",
+        "format-bluetooth-muted": " ",
+        "format-muted": " Mute",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol",
+        "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "scroll-step": 5,
+        "max-volume": 150,
+        "tooltip": true,
+        "tooltip-format": "{desc}\n{volume}%"
+    },
+
+    "network": {
+        "format": "{ifname}",
+        "format-wifi": " {signalStrength}%",
+        "format-ethernet": " {ifname}",
+        "format-linked": " {ifname} (No IP)",
+        "format-disconnected": " Offline",
+        "tooltip": true,
+        "tooltip-format": "{essid}\n{signalStrength}% | {ipaddr}",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%)\nIP: {ipaddr}\n {frequency}MHz\n {ifname}",
+        "tooltip-format-ethernet": "IP: {ipaddr}\n {ifname}",
+        "on-click": "kitty -e nmtui",
+        "interval": 5
+    },
+
+    "memory": {
+        "format": " {}%",
+        "interval": 5,
+        "max-length": 10,
+        "tooltip": true,
+        "tooltip-format": "RAM: {percentage}%\nUsed: {used}GB / {total}GB\nAvailable: {avail}GB",
+        "states": {
+            "warning": 70,
+            "critical": 90
+        }
+    },
+
+    "cpu": {
+        "format": " {usage}%",
+        "interval": 5,
+        "tooltip": true,
+        "tooltip-format": "CPU Usage: {usage}%\nFrequency: {frequency}GHz\nCores: {cores}",
+        "states": {
+            "warning": 70,
+            "critical": 90
+        }
+    },
+
+    "battery": {
+        "format": "{icon} {capacity}%",
+        "format-icons": ["", "", "", "", ""],
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-full": " 100%",
+        "format-warning": " {capacity}%",
+        "format-not-charging": " {capacity}%",
+        "interval": 30,
+        "states": {
+            "warning": 20,
+            "critical": 10,
+            "good": 95,
+            "full": 100
+        },
+        "tooltip": true,
+        "tooltip-format": "{timeTo}\n{power}W",
+        "on-click": "kitty -e top"
+    },
+
+    "clock": {
+        "format": " {H:%M}",
+        "format-alt": " {d}/{m}/{Y}  {H:%M:%S}",
+        "tooltip": true,
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode": "month",
+            "mode-mon-col": 3,
+            "weeks-pos": "right",
+            "on-scroll": 1,
+            "on-click-right": "mode",
+            "format": {
+                "months": "<span color='#00ff9f'><b>{}</b></span>",
+                "days": "<span color='#00d4ff'>{}</span>",
+                "weeks": "<span color='#ff2e63'><b>W{}</b></span>",
+                "weekdays": "<span color='#bb9af7'>{}</span>",
+                "today": "<span color='#ff2e63'><b><u>{}</u></b></span>"
+            }
+        },
+        "actions": {
+            "on-click-right": "mode",
+            "on-click-forward": "tz_up",
+            "on-click-backward": "tz_down",
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        }
+    },
+
+    "custom/separator": {
+        "format": "|",
+        "tooltip": false
+    },
+
+    "custom/power": {
+        "format": "",
+        "on-click": "wlogout",
+        "tooltip": false
+    },
+
+    "custom/window_info": {
+        "format": "🪟 {}",
+        "escape": true,
+        "return-type": "json",
+        "exec": "~/.config/hypr/scripts/window_tools/waybar_window_info.sh info",
+        "interval": 2,
+        "on-click": "kitty -e ~/.config/hypr/scripts/window_tools/window_layout.sh list",
+        "on-click-right": "~/.config/hypr/scripts/window_tools/window_layout.sh save current",
+        "on-click-middle": "~/.config/hypr/scripts/window_tools/window_move.sh center center",
+        "tooltip": true,
+        "tooltip-format": "Click: Ver layouts\nRight-click: Guardar layout\nMiddle-click: Centrar ventana"
+    },
+
+    "custom/window_snap": {
+        "format": " Snap",
+        "tooltip": true,
+        "tooltip-format": "Click: Izquierda\nRight: Derecha\nMiddle: Fullscreen\nScroll: Arriba/Abajo",
+        "on-click": "~/.config/hypr/scripts/window_tools/window_snap.sh left",
+        "on-click-right": "~/.config/hypr/scripts/window_tools/window_snap.sh right",
+        "on-click-middle": "~/.config/hypr/scripts/window_tools/window_snap.sh full",
+        "on-scroll-up": "~/.config/hypr/scripts/window_tools/window_snap.sh top",
+        "on-scroll-down": "~/.config/hypr/scripts/window_tools/window_snap.sh bottom",
+        "interval": 1
+    }
+}
