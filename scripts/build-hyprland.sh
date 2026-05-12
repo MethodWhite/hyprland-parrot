@@ -21,6 +21,7 @@ log_warn() { echo -e "${YELLOW}[WARN]${NC} $1"; }
 log_error() { echo -e "${RED}[ERROR]${NC} $1"; }
 
 # Directorios
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BUILD_DIR="$HOME/hyprland-build"
 INSTALL_PREFIX="/usr"
 
@@ -35,17 +36,28 @@ setup_build_dir() {
 clone_repos() {
     log_info "Clonando repositorios de Hyprland..."
     
-    # Versiones estables conocidas
-    local HYPRCURSOR_VERSION="v0.1.9"
-    local HYPRUTILS_VERSION="v0.1.10"
-    local HYPRGRAPHICS_VERSION="v0.4.0"
-    local HYPRLANG_VERSION="v0.6.7"
-    local AQUAMARINE_VERSION="v0.7.3"
-    local HYPRCURSOR_UTIL_VERSION="v0.1.9"
-    local HYPRPAPER_VERSION="v1.0.0"
-    local HYPRLOCK_VERSION="v1.0.0"
-    local HYPRIDLE_VERSION="v0.1.3"
-    local XDPH_VERSION="v1.3.1"
+    # Versiones estables - actualizadas a Mayo 2026
+    # Compatibles con Hyprland v0.54.3 (target Debian/Parrot backports)
+    local HYPRLAND_VERSION="v0.54.3"
+    local HYPRCURSOR_VERSION="v0.1.13"
+    local HYPRUTILS_VERSION="v0.11.1"
+    local HYPRGRAPHICS_VERSION="v0.5.0"
+    local HYPRLANG_VERSION="v0.6.8"
+    local AQUAMARINE_VERSION="v0.10.0"
+    local HYPRPAPER_VERSION="v0.8.4"
+    local HYPRLOCK_VERSION="v0.9.5"
+    local HYPRIDLE_VERSION="v0.1.7"
+    local XDPH_VERSION="v1.3.12"
+    
+    # Si se pasa --stable-latest, usar tags más recientes
+    # (pueden requerir dependencias más nuevas del sistema)
+    if [[ "$1" == "--latest" ]]; then
+        HYPRLAND_VERSION="v0.55.0"
+        HYPRGRAPHICS_VERSION="v0.5.1"
+        AQUAMARINE_VERSION="v0.11.0"
+        HYPRUTILS_VERSION="v0.12.0"
+        log_warn "Usando versiones latest - pueden requerir dependencias bleeding-edge"
+    fi
     
     # Hyprcursor (gestión de cursores)
     if [ ! -d "hyprcursor" ]; then
@@ -80,6 +92,7 @@ clone_repos() {
     # Hyprland (compositor principal)
     if [ ! -d "Hyprland" ]; then
         git clone --recursive https://github.com/hyprwm/Hyprland.git
+        cd Hyprland && git checkout "$HYPRLAND_VERSION" && cd ..
     fi
     
     # Hyprpaper (fondos de pantalla)
@@ -209,6 +222,18 @@ EOF
     log_success "Archivo de sesión creado"
 }
 
+# Aplicar fix de EGL para sistemas dual-GPU (Intel + NVIDIA)
+apply_egl_fix() {
+    log_info "Aplicando fix de EGL para compatibilidad dual-GPU..."
+    local fix_script="$SCRIPT_DIR/fix-egl-dualgpu.sh"
+    if [[ -f "$fix_script" ]]; then
+        sudo bash "$fix_script"
+    else
+        log_warn "fix-egl-dualgpu.sh no encontrado, salteando..."
+        log_info "Ejecutá manualmente: sudo bash scripts/fix-egl-dualgpu.sh"
+    fi
+}
+
 # Limpiar
 cleanup() {
     log_info "¿Deseas eliminar los archivos de compilación para ahorrar espacio? (y/n)"
@@ -242,6 +267,7 @@ main() {
     clone_repos
     build_all
     verify_install
+    apply_egl_fix
     create_session_file
     
     # Opcional: cleanup
