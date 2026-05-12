@@ -104,7 +104,9 @@ install_graphics_deps() {
         libglx-dev \
         libgl1-mesa-dev \
         libvulkan-dev \
-        vulkan-tools
+        vulkan-tools \
+        libre2-dev \
+        libudis86-dev
 }
 
 # Instalar dependencias de entrada
