@@ -1,14 +1,18 @@
-# Hyprland para Parrot Security OS
+# Hyprland para Parrot Security OS v3.0
 
 > Configuración completa de Hyprland Wayland Compositor optimizada para Parrot Security OS 7.x
+> **Versión 3.0.0** — Mayo 2026 — Hyprland v0.54.3
 
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Parrot OS](https://img.shields.io/badge/Parrot-7.x-blue)
-![Hyprland](https://img.shields.io/badge/Hyprland-latest-cyan)
+![Hyprland](https://img.shields.io/badge/Hyprland-v0.54.3-cyan)
+![Version](https://img.shields.io/badge/version-3.0.0-purple)
 
 ## 🚀 Características
 
-- **Hyprland** compilado desde fuente para Parrot OS
+- **Hyprland v0.54.3** compilado desde fuente para Parrot OS (build estable)
+- **Flag `--latest`** para compilar con v0.55.0+ (experimental)
+- **🛡️ Fix EGL Dual-GPU**: Reparación automática para sistemas Intel + NVIDIA
 - **Waybar** completamente funcional con estilo S4vitar
 - **Tema Synapse-Purple**: Colores neón (verde/cyan/purple)
 - **Optimizado** para laptops ASUS TUF y hardware similar
@@ -77,9 +81,11 @@ hyprland-parrot/
 ├── scripts/
 │   ├── install.sh          # Instalador principal
 │   ├── install-deps.sh     # Instalación de dependencias
-│   ├── build-hyprland.sh   # Compilación de Hyprland
+│   ├── build-hyprland.sh   # Compilación de Hyprland (--latest para bleeding edge)
+│   ├── emergency-install.sh # Instalador de emergencia (compila todo desde fuente)
 │   ├── install-config.sh   # Instalación de configuraciones
 │   ├── install-window-tools.sh  # ✨ Instalador sistema de ventanas
+│   ├── fix-egl-dualgpu.sh  # 🛡️ Fix EGL para sistemas Intel + NVIDIA
 │   └── post-install.sh     # Configuración post-instalación
 ├── scripts/window_tools/   # ✨ Sistema de Ventanas Dinámicas
 │   ├── window_move.sh      # Mover ventanas a (x, y)

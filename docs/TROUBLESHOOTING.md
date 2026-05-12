@@ -1,5 +1,42 @@
 # Troubleshooting - Hyprland para Parrot OS
 
+## ⚡ Problema Crítico: Hyprland Crashing (EGL + Dual-GPU)
+
+### Hyprland crashea al iniciar (8 crash reports, `eglInitialize failed`)
+
+**Causa:** En sistemas dual-GPU (Intel iGPU + NVIDIA dGPU), Debian/Parrot puede dejar
+`libEGL.so.1` apuntando a la biblioteca EGL de NVIDIA. Hyprland renderiza con la GPU
+conectada al display (normalmente la Intel), por lo que necesita EGL via Mesa.
+
+**Solución automática:**
+```bash
+sudo bash scripts/fix-egl-dualgpu.sh
+```
+
+Este script:
+1. Detecta configuración dual-GPU
+2. Revisa si `libEGL.so.1` apunta a NVIDIA
+3. Restaura alternativas de Debian a `mesa-diverted`
+4. Verifica permisos del grupo `render`
+5. Limpia crash reports viejos
+
+**Verificación manual:**
+```bash
+# ¿EGL roto?
+readlink -f /usr/lib/x86_64-linux-gnu/libEGL.so.1
+# Si dice "libEGL_nvidia.so" -> ROTO
+
+# ¿EGL funciona?
+EGL_PLATFORM=surfaceless eglinfo 2>&1 | head -5
+# Si dice "eglInitialize failed" -> necesita fix
+
+# ¿Grupo render?
+groups | grep -o render
+# Si no sale "render": sudo usermod -aG render $USER
+```
+
+---
+
 ## Problemas de Inicio
 
 ### Hyprland no inicia desde el display manager

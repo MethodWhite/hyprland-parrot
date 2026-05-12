@@ -1,9 +1,45 @@
 # Changelog
 
-Todos los cambios notables a este proyecto serán documentados en este archivo.
+## [3.0.0] - 2026-05-12
 
-El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
-y este proyecto se adhiere a [Versionado Semántico](https://semver.org/spec/v2.0.0.html).
+### 🚀 Actualización Mayor - Hyprland v0.54.3 + Fix Dual-GPU
+
+#### Versiones Actualizadas
+- **Hyprland**: v0.45.0 → **v0.54.3** (build `--latest` usa v0.55.0)
+- **aquamarine**: v0.7.3 → **v0.10.0**
+- **hyprcursor**: v0.1.9 → **v0.1.13**
+- **hyprgraphics**: v0.4.0 → **v0.5.0**
+- **hyprlang**: v0.6.7 → **v0.6.8**
+- **hyprutils**: v0.1.10 → **v0.11.1**
+- **hyprpaper**: v1.0.0 → **v0.8.4**
+- **hyprlock**: v1.0.0 → **v0.9.5**
+- **hypridle**: v0.1.3 → **v0.1.7**
+- **xdg-desktop-portal-hyprland**: v1.3.1 → **v1.3.12**
+
+### ✨ Agregado
+- **Script `fix-egl-dualgpu.sh`**: Reparación automática de la cadena EGL para sistemas dual-GPU (Intel + NVIDIA)
+  - Detecta si `libEGL.so.1` apunta incorrectamente a NVIDIA en vez de Mesa
+  - Restaura alternativas de Debian a `mesa-diverted`
+  - Verifica permisos del grupo `render`
+  - Limpia crash reports viejos de Hyprland
+- **Flag `--latest`** en build-hyprland.sh: permite compilar con los tags más recientes de cada componente
+- **Integración automática del fix EGL** en post-install de `build-hyprland.sh` y `emergency-install.sh`
+
+### 🔧 Corregido
+- **EGL roto en sistemas Intel + NVIDIA**: `libEGL.so.1` apuntaba a NVIDIA causando crashes de Hyprland (`eglInitialize failed`)
+- **Crash reports**: 8 crashes documentados en `~/.local/share/hyprland/` causados por el problema EGL
+- **Password hardcodeado** en `emergency-install.sh` → reemplazado por sudo normal
+
+### 📦 Nuevas dependencias
+- `libre2-dev` (requerido por Hyprland ≥0.52)
+- `libudis86-dev` (requerido por Hyprland ≥0.52)
+- Se usa `nproc` en vez de `-j4` estático para mejor rendimiento de compilación
+
+### ⚠️ Breaking Changes
+- `emergency-install.sh` ya no usa password hardcodeado; requiere sudo interactivo
+- Las configuraciones de Hyprland 0.45.0 son forward-compatibles con 0.54.3
+
+---
 
 ## [2.0.0] - 2026-03-26
 
